@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: ${SERVICENAME}-${NODE}
+  name: ${SERVICENAME}-${NODE} 
+spec:
+  replicas: 1
+  selector:
+    name: ${SERVICENAME}-${NODE}
+  template:
+    metadata:
+      labels:
+        name: ${SERVICENAME}-${NODE}
+    spec:
+      containers:
+        - resources:
+            limits: 
+              cpu: 0.3
+          image: capttofu/percona_xtradb_cluster_5_6:latest
+          name: ${SERVICENAME}-${NODE}
+          ports:
+            - containerPort: 3306
+              name: mysql
+            - containerPort: 4444
+            - containerPort: 4567
+            - containerPort: 4568
+          env:
+            - name: GALERA_CLUSTER
+              value: "true"
+            - name: WSREP_CLUSTER_ADDRESS
+              value: gcomm://
+            - name: WSREP_SST_USER
+              value: sst
+            - name: WSREP_SST_PASSWORD
+              value: sst
+            - name: MYSQL_USER
+              value: mysql
+            - name: MYSQL_PASSWORD
+              value: mysql
+            - name: MYSQL_ROOT_PASSWORD
+              value: thundercats
