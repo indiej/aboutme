@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ${SERVICENAME}-m
+  labels:
+    name: ${SERVICENAME}-m
+    service: ${SERVICENAME}-m
+spec:
+  containers:
+    - resources:
+        limits :
+          cpu: 0.5
+      image: mysql
+      name: ${SERVICENAME}-m
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: password
+        - name: MYSQL_DATABASE
+          value: aboutme
+        - name: MYSQL_USER
+          value: aboutme-user
+        - name: MYSQL_PASSWORD
+          value: password
+      ports:
+        - containerPort: 3306
+          name: mysql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${SERVICENAME}-m
+  labels:
+    name: ${SERVICENAME}-m
+    service: ${SERVICENAME}-m
+spec:
+  ports:
+    # the port that this service should serve on
+    - port: 3306
+  # label keys and values that must match in order to receive traffic for this service
+  selector:
+    name: ${SERVICENAME}-m
+    service: ${SERVICENAME}-m
