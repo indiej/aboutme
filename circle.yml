@@ -19,7 +19,7 @@ machine:
     #  MYSQLNAME: pxc-$(tr [A-Z] [a-z] <<< ${CIRCLE_PROJECT_USERNAME:0:8})-$(tr [A-Z] [a-z] <<< ${CIRCLE_PROJECT_REPONAME:0:8})
     # the docker repo
     DOCKER_HOST: unix:///tmp/docker.sock
-    DOCKER_REGISTRY: docker-registry.concur.com
+    DOCKER_REGISTRY: docker-registry.concur.com:5001
     # the docker container
     CONTAINER1: ${CIRCLE_PROJECT_USERNAME}/me-$(tr [A-Z] [a-z] <<< ${CIRCLE_PROJECT_REPONAME})
 

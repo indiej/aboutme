@@ -1,7 +1,7 @@
 FROM java:8
 VOLUME /tmp
 
-ADD /target/VATLab-java-ms-1.0.0.jar app.jar
+ADD /target/VATLab-java-ms-Appan-1.0.0.jar app.jar
 
 # Expose ports.
 EXPOSE 8080
